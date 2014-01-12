@@ -35,11 +35,18 @@ chrome.browserAction.onClicked.addListener(function (tab) {
 
 
   chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-    if (tab.id === originalTab.id && 'url' in changeInfo) {
-      chrome.tabs.sendMessage(cameleonTab.id, {
-        update: true,
-        url: changeInfo.url
-      }, function (response) {});
+    if (tab.id === originalTab.id) {
+      if ('url' in changeInfo) {
+        chrome.tabs.sendMessage(cameleonTab.id, {
+          update: true,
+          url: changeInfo.url
+        }, function (response) {});
+      } else if ('status' in changeInfo && changeInfo.status === 'loading') {
+        chrome.tabs.sendMessage(cameleonTab.id, {
+          update: true,
+          url: originalTab.url
+        }, function (response) {});
+      }
     }
   });
 });
