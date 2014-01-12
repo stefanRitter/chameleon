@@ -1,6 +1,6 @@
 // Cameleon v0.0.1 by Stefan Ritter
-// MIT Licesense
-// github.com/stefanRitter/cameloen
+// MIT License
+// https://github.com/stefanRitter/cameleon
 
 // background.js:
 // 1. opens a new tab
