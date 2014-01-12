@@ -1,0 +1,22 @@
+{
+  "manifest_version": 2,
+
+  "name": "Cameleon",
+  "description": "Let's you quickly preview your web app in multiple device viewports.",
+  "version": "0.0.1",
+
+  "permissions": [
+    "activeTab",
+    "tabs"
+  ],
+  
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "View in Cameleon"
+  }
+}
