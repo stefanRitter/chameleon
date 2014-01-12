@@ -5,25 +5,26 @@
 // background.js:
 // 1. opens a new tab
 // 2. sends page url and devices options
-// 3. listens for and sends refresh messages
-
-
-var cameleonTab = {},
-    devices = [{
-      type: 'ios',
-      title: 'iPhone 4',
-      x: 320,
-      y: 480
-    },
-    {
-      type: 'ios',
-      title: 'iPhone 5',
-      x: 320,
-      y: 568
-    }];
+// 3. listens for updates and sends refresh messages
 
 
 chrome.browserAction.onClicked.addListener(function (tab) {
+  var cameleonTab = {id: 0},
+      originalTab = tab,
+      devices = [{
+        type: 'ios',
+        title: 'iPhone 4',
+        x: 320,
+        y: 480
+      },
+      {
+        type: 'ios',
+        title: 'iPhone 5',
+        x: 320,
+        y: 568
+      }];
+
+
   chrome.tabs.create({'url': chrome.extension.getURL('cameleon.html')}, function (newTab) {
     cameleonTab = newTab;
     chrome.tabs.sendMessage(cameleonTab.id, {
@@ -31,4 +32,15 @@ chrome.browserAction.onClicked.addListener(function (tab) {
       devices: devices
     }, function (response) {});
   });
+
+
+  chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+    if (tab.id === originalTab.id && 'url' in changeInfo) {
+      chrome.tabs.sendMessage(cameleonTab.id, {
+        update: true,
+        url: changeInfo.url
+      }, function (response) {});
+    }
+  });
 });
+

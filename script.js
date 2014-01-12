@@ -35,7 +35,7 @@ chrome.extension.onMessage.addListener(function (message, sender, sendResponse){
       url = '',
       i, len;
 
-  if ('url' in message) {
+  if ('devices' in message) {
     devices = message.devices;
     url = message.url;
     
@@ -43,9 +43,11 @@ chrome.extension.onMessage.addListener(function (message, sender, sendResponse){
       constructDevice(devices[i], url, 'portrait');
       constructDevice(devices[i], url, 'landscape');
     }
+  
   } else { // reload all iframes
+    url = message.url;
     $('iframe').each(function (index) {
-      this.src = this.src;
+      this.src = url;
     });
   }
 });
