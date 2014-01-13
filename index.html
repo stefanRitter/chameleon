@@ -3,29 +3,49 @@
   <head>
     <title>Cameleon - Simply beautiful responsive testing.</title>
     <style type="text/css">
+      @font-face { 
+        font-family: multicolore;
+        src: url('multicolore.otf');
+      }
       html, body {
-        font-family: Helvetica, Arial, sans-serif;
+        font-family: multicolore, sans-serif;
         text-align: center;
         background-color: WhiteSmoke;
         width: 100%;
         height: 100%;
         margin: 0;
         padding: 0;
+        background-color: #5a53e5;
+        color: #482e05;
+
+        -webkit-transition: background-color 1.5s ease-in-out;
+        -moz-transition: background-color 1.5s ease-in-out;
+        -o-transition: background-color 1.5s ease-in-out;
+        transition: background-color 1.5s ease-in-out;
+      }
+      body {
+        background: url(cameleon.svg) no-repeat left center;
+        background-size: 200% 200%;
+        display: table;
       }
       section {
         margin: 0;
         padding: 0;
         width: 95%;
-        max-width: 800px;
         margin: 0 auto;
         min-height: 100%;
         position: relative;
+        display: table-cell;
+        vertical-align: middle;
       }
       footer {
         width: 100%;
         position: absolute;
         bottom: 1em;
         font-size: 0.8em;
+      }
+      .spacer {
+        height: 2em;
       }
       footer a {
         text-decoration: none;
@@ -39,14 +59,21 @@
         font-size: 0.8em;
         letter-spacing: 1px;
         border-radius: 10px;
+        margin: 0.5em;
       }
-      .red-bg {
-        background-color: #CF2A31;
-        color: White;
+      .mint-bg {
+        background-color: #59b63f;
+        color: inherit;
       }
       .green-bg {
-        background-color: #83C240;
-        color: White;
+        background-color: #a7ecc1;
+        color: inherit;
+      }
+      .twitter {
+        padding-top: 1em;
+      }
+      h1, h2 {
+        text-align: center;
       }
       h1 {
         font-size: 8em;
@@ -59,24 +86,70 @@
         font-size: 2em;
         line-height: 1.4em;
       }
+      @media (max-width: 630px) {
+        h1 {
+          font-size: 6em
+        }
+        body {
+          background-size: 100% 100%;
+        }
+      }
     </style>
   </head>
   <body>
     <section>
-      <h1>Cameleon</h1>
-      <h2>Simply beautiful responsive testing.</h2>
+      <h1>
+        <span>C</span>
+        <span>a</span>
+        <span>m</span>
+        <span>e</span>
+        <span>l</span>
+        <span>e</span>
+        <span>o</span>
+        <span>n</span>
+      </h1>
+      
+      <h2>Beautifully simple responsive website testing.</h2>
       
       <p>
         <a href="https://github.com/stefanRitter/cameleon" class="button green-bg">Get the Chrome Extension</a>
-        <a href="https://github.com/stefanRitter/cameleon" class="button red-bg">View on github</a>
         <br>
-        <br>
-        <a href="https://twitter.com/share" class="twitter-share-button" data-via="S__Ritter" data-size="large" data-count="none">Tweet</a>
-        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        <a href="https://twitter.com/S__Ritter" class="twitter-follow-button" data-show-count="false" data-size="large" data-show-screen-name="false">Follow @S__Ritter</a>
-        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        <a href="https://github.com/stefanRitter/cameleon" class="button mint-bg">View on github</a>
       </p>
+      
+      <p class="twitter">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-via="S__Ritter" data-size="large" data-count="none">
+          Tweet
+        </a>
+        <script>
+          !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+        </script>
+        <a href="https://twitter.com/S__Ritter" class="twitter-follow-button" data-show-count="false" data-size="large" data-show-screen-name="false">
+          Follow @S__Ritter
+        </a>
+        <script>
+          !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+        </script>
+      </p>
+      
+      <div class="spacer"></div>
       <footer>Jan 2014, <a href="https://plus.google.com/+StefanRitter?rel=author">Stefan Ritter</a></footer>
     </section>
+
+    <script type="text/javascript">
+      (function () {
+        'use strict';
+        
+        var colors = ['#59b63f', '#5a53e5', '#a7ecc1', '#cad42c'],
+            htmlEl = document.body.parentNode,
+            i = 0;
+        
+        setInterval( function () {
+          htmlEl.style.backgroundColor = colors[i];
+          i += 1;
+          i = i%colors.length;
+        }, 4000);
+      })();
+    </script>
   </body>
 </html>
