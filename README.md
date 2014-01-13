@@ -11,5 +11,11 @@ Todo:
 - icon / logo
 - Screenshots for homepage and webstore
 
+
+Nice to have:
+
 - check against SAMEORIGIN iframes
 - check against file:// urls
+
+
+Advanced Todo:
