@@ -8,7 +8,6 @@ Todo:
 
 - import Settings / settings page
 - Tab layout
-- icon / logo
 - Screenshots for homepage and webstore
 
 
@@ -16,6 +15,4 @@ Nice to have:
 
 - check against SAMEORIGIN iframes
 - check against file:// urls
-
-
-Advanced Todo:
+- auto import viewports from http://viewportsizes.com/
