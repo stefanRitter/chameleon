@@ -9,46 +9,54 @@
 // 4. refresh on request
 
 
-function constructDevice(device, url, orientation) {
-  var deviceTemplate = '<div class="device"><iframe></iframe><br><span class="title"></span></div>',
-      $newDevice = $(deviceTemplate),
-      x = (orientation === 'landscape') ? device.y : device.x,
-      y = (orientation === 'landscape') ? device.x : device.y;
+(function () {
+  'use strict';
 
-  $newDevice
-    .find('iframe')
-    .attr({
-      src: url,
-      width: x,
-      height: y
-    })
-    .addClass(device.type + '-' + orientation)
-    .siblings('.title')
-    .text(device.title);
-  
-  $('.' + orientation).append($newDevice);
-}
+  function constructDevice(device, url, orientation) {
+    var deviceTemplate = '<div class="device"><iframe></iframe><br><span class="title"></span></div>',
+        $newDevice = $(deviceTemplate),
+        x = (orientation === 'landscape') ? device.y : device.x,
+        y = (orientation === 'landscape') ? device.x : device.y,
+        localFile = /file:\/\//;
 
-
-chrome.extension.onMessage.addListener(function (message, sender, sendResponse){
-  var devices = [],
-      url = '',
-      i, len;
-
-  if ('devices' in message) {
-    devices = message.devices;
-    url = message.url;
-    
-    for (i = 0, len = devices.length; i < len; i++) {
-      constructDevice(devices[i], url, 'portrait');
-      constructDevice(devices[i], url, 'landscape');
+    if (localFile.test(url)) {
+      url = 'error.html';
     }
-  
-  } else { // reload all iframes
-    url = message.url;
-    $('iframe').each(function (index) {
-      this.src = url;
-    });
-  }
-});
 
+    $newDevice
+      .find('iframe')
+      .attr({
+        src: url,
+        width: x,
+        height: y
+      })
+      .addClass(device.type + '-' + orientation)
+      .siblings('.title')
+      .text(device.title);
+    
+    $('.' + orientation).append($newDevice);
+  }
+
+
+  chrome.extension.onMessage.addListener(function (message, sender, sendResponse){
+    var devices = [],
+        url = '',
+        i, len;
+
+    if ('devices' in message) {
+      devices = message.devices;
+      url = message.url;
+      
+      for (i = 0, len = devices.length; i < len; i++) {
+        constructDevice(devices[i], url, 'portrait');
+        constructDevice(devices[i], url, 'landscape');
+      }
+    
+    } else { // reload all iframes
+      url = message.url;
+      $('iframe').each(function (index) {
+        this.src = url;
+      });
+    }
+  });
+})();
