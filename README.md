@@ -9,10 +9,9 @@ Todo:
 - import Settings / settings page
 - Tab layout
 - Screenshots for homepage and webstore
-
+- error page styling
 
 Nice to have:
 
-- check against SAMEORIGIN iframes
-- check against file:// urls
+- check against SAMEORIGIN iframe errors
 - auto import viewports from http://viewportsizes.com/
