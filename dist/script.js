@@ -13,28 +13,31 @@
   'use strict';
 
   function constructDevice(device, url, orientation) {
-    var deviceTemplate = '<div class="device"><iframe></iframe><br><span class="title"></span></div>',
-        $newDevice = $(deviceTemplate),
-        x = (orientation === 'landscape') ? device.y : device.x,
-        y = (orientation === 'landscape') ? device.x : device.y,
-        localFile = /file:\/\//;
+    chrome.extension.isAllowedFileSchemeAccess(function (isAllowedAccess) {
 
-    if (localFile.test(url)) {
-      url = 'error.html';
-    }
+      var deviceTemplate = '<div class="device"><iframe></iframe><br><span class="title"></span></div>',
+          $newDevice = $(deviceTemplate),
+          x = (orientation === 'landscape') ? device.y : device.x,
+          y = (orientation === 'landscape') ? device.x : device.y,
+          localFile = /file:\/\//;
 
-    $newDevice
-      .find('iframe')
-      .attr({
-        src: url,
-        width: x,
-        height: y
-      })
-      .addClass(device.type + '-' + orientation)
-      .siblings('.title')
-      .text(device.title);
-    
-    $('.' + orientation).append($newDevice);
+      if (localFile.test(url) && !isAllowedAccess) {
+        url = 'error.html';
+      }
+
+      $newDevice
+        .find('iframe')
+        .attr({
+          src: url,
+          width: x,
+          height: y
+        })
+        .addClass(device.type + '-' + orientation)
+        .siblings('.title')
+        .text(device.title);
+      
+      $('.' + orientation).append($newDevice);
+    });
   }
 
 
