@@ -22,11 +22,14 @@
           localFile = /file:\/\//;
 
       if (localFile.test(url) && !isAllowedAccess) {
-        url = 'error.html';
+        url = 'error-file-url.html';
       }
 
       $newDevice
         .find('iframe')
+        .on('load', function () {
+          console.log($newDevice.find('iframe')[0].contentWindow);
+        })
         .attr({
           src: url,
           width: x,
@@ -35,7 +38,7 @@
         .addClass(device.type + '-' + orientation)
         .siblings('.title')
         .text(device.title);
-      
+
       $('.' + orientation).append($newDevice);
     });
   }
