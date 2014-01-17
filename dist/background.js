@@ -1,4 +1,4 @@
-// Cameleon v0.0.1 by Stefan Ritter
+// Cameleon by Stefan Ritter
 // MIT License
 // https://github.com/stefanRitter/cameleon
 
