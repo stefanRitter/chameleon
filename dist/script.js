@@ -28,7 +28,8 @@
       $newDevice
         .find('iframe')
         .on('load', function () {
-          console.log($newDevice.find('iframe')[0].contentWindow);
+          console.log(typeof this.contentWindow);
+          console.log(this.contentWindow === '');
         })
         .attr({
           src: url,
