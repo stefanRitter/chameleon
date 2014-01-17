@@ -13,24 +13,24 @@
   'use strict';
 
   function constructDevice(device, url, orientation) {
-    chrome.extension.isAllowedFileSchemeAccess(function (isAllowedAccess) {
-
-      var deviceTemplate = '<div class="device"><iframe></iframe><br><span class="title"></span></div>',
-          $newDevice = $(deviceTemplate),
-          x = (orientation === 'landscape') ? device.y : device.x,
-          y = (orientation === 'landscape') ? device.x : device.y,
-          localFile = /file:\/\//;
-
-      if (localFile.test(url) && !isAllowedAccess) {
-        url = 'error-file-url.html';
+    var deviceTemplate = '<div class="device"><iframe></iframe><br><span class="title"></span></div>',
+        $newDevice = $(deviceTemplate),
+        x = (orientation === 'landscape') ? device.y : device.x,
+        y = (orientation === 'landscape') ? device.x : device.y;
+      
+    var xhr = new XMLHttpRequest(); 
+    
+    xhr.onreadystatechange = function () {
+      // test for SAMEORIGIN
+      var xfopts = this.getResponseHeader('x-frame-options');
+      xfopts = (typeof xfopts === 'string') ? xfopts.toUpperCase() : null;
+      
+      if (xfopts === 'SAMEORIGIN' || xfopts === 'DENY') {
+        url = 'error-x-frame-options.html';
       }
-
+      
       $newDevice
         .find('iframe')
-        .on('load', function () {
-          console.log(typeof this.contentWindow);
-          console.log(this.contentWindow === '');
-        })
         .attr({
           src: url,
           width: x,
@@ -41,29 +41,39 @@
         .text(device.title);
 
       $('.' + orientation).append($newDevice);
-    });
+    };
+    
+    xhr.open('GET', url, true);
+    xhr.send();
   }
 
 
-  chrome.extension.onMessage.addListener(function (message, sender, sendResponse){
-    var devices = [],
-        url = '',
+  chrome.extension.onMessage.addListener(function (message, sender, sendResponse) {
+    chrome.extension.isAllowedFileSchemeAccess(function (isAllowedAccess) {
+      var devices = [],
+        url = message.url,
+        localFile = /file:\/\//,
         i, len;
 
-    if ('devices' in message) {
-      devices = message.devices;
-      url = message.url;
-      
-      for (i = 0, len = devices.length; i < len; i++) {
-        constructDevice(devices[i], url, 'portrait');
-        constructDevice(devices[i], url, 'landscape');
+      if (localFile.test(url) && !isAllowedAccess) {
+        url = 'error-file-url.html';
       }
-    
-    } else { // reload all iframes
-      url = message.url;
-      $('iframe').each(function (index) {
-        this.src = url;
-      });
-    }
+
+      if ('devices' in message) {
+        devices = message.devices;
+        
+        for (i = 0, len = devices.length; i < len; i++) {
+          constructDevice(devices[i], url, 'portrait');
+          constructDevice(devices[i], url, 'landscape');
+        }
+      
+      } else { 
+        // update all iframes
+        devices = Array.prototype.slice.call(document.getElementsByTagName('iframe'));
+        devices.forEach(function (iframe) {
+          iframe.src = url;
+        });
+      }
+    });
   });
 })();

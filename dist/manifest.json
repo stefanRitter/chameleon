@@ -8,7 +8,9 @@
   "permissions": [
     "activeTab",
     "tabs",
-    "file://*/*"
+    "file://*/*",
+    "http://*/*",
+    "https://*/*"
   ],
   
   "background": {
