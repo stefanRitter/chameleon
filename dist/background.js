@@ -9,6 +9,8 @@
 
 
 chrome.browserAction.onClicked.addListener(function (tab) {
+  'use strict';
+
   var cameleonTab = {id: 0},
       originalTab = tab,
       devices = [{
