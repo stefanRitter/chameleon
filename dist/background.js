@@ -35,17 +35,20 @@ chrome.browserAction.onClicked.addListener(function (tab) {
 
 
   chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+    var updateIframes = function () {
+      chrome.tabs.sendMessage(cameleonTab.id, {
+        update: true,
+        url: originalTab.url
+      }, function (response) {});
+    };
+    
     if (tab.id === originalTab.id) {
+      
       if ('url' in changeInfo) {
-        chrome.tabs.sendMessage(cameleonTab.id, {
-          update: true,
-          url: changeInfo.url
-        }, function (response) {});
+        originalTab.url = changeInfo.url;
+        updateIframes();
       } else if ('status' in changeInfo && changeInfo.status === 'loading') {
-        chrome.tabs.sendMessage(cameleonTab.id, {
-          update: true,
-          url: originalTab.url
-        }, function (response) {});
+        updateIframes();
       }
     }
   });
