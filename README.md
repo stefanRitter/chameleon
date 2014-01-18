@@ -9,7 +9,6 @@ Todo:
 - import Settings / settings page
 - Tab layout
 - Screenshots for homepage and webstore
-- error page styling
 
 Nice to have:
 
