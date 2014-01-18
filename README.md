@@ -7,6 +7,4 @@ Chrome extension Cameloen let's you quickly preview your web app in multiple dev
 Todo:
 
 - import Settings / settings page
-- Tab layout
-- Screenshots for homepage and webstore
 
