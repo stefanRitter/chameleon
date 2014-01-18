@@ -10,6 +10,3 @@ Todo:
 - Tab layout
 - Screenshots for homepage and webstore
 
-Nice to have:
-
-- auto import viewports from http://viewportsizes.com/

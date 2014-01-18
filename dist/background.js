@@ -13,7 +13,7 @@ chrome.browserAction.onClicked.addListener(function (tab) {
 
   var cameleonTab = {id: 0},
       originalTab = tab,
-      devices = [{
+      defaultDevices = [{
         type: 'ios',
         title: 'iPhone 4',
         x: 320,
@@ -24,10 +24,18 @@ chrome.browserAction.onClicked.addListener(function (tab) {
         title: 'iPhone 5',
         x: 320,
         y: 568
+      },
+      {
+        type: 'android',
+        title: 'HTC one',
+        x: 360,
+        y: 640
       }];
 
 
   chrome.tabs.create({'url': chrome.extension.getURL('cameleon.html')}, function (newTab) {
+    var devices = localStorage['cameleon_devices'] || defaultDevices;
+
     cameleonTab = newTab;
     chrome.tabs.sendMessage(cameleonTab.id, {
       url: tab.url,

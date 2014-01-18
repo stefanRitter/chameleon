@@ -13,23 +13,25 @@
   'use strict';
 
   function constructDevice(device, url, orientation) {
-    var deviceTemplate = '<div class="device"><iframe></iframe><br><span class="title"></span></div>',
+    var deviceTemplate = '<div class="device"><iframe></iframe><span class="button"></span><br><span class="title"></span></div>',
         $newDevice = $(deviceTemplate),
         x = (orientation === 'landscape') ? device.y : device.x,
-        y = (orientation === 'landscape') ? device.x : device.y;
+        y = (orientation === 'landscape') ? device.x : device.y,
+        $section = $('.' + orientation),
+        sectionWidth = $section.width();
       
     $newDevice
+      .addClass(device.type + '-' + orientation)
       .find('iframe')
       .attr({
         src: url,
         width: x,
         height: y
       })
-      .addClass(device.type + '-' + orientation)
       .siblings('.title')
       .text(device.title);
 
-    $('.' + orientation).append($newDevice);
+    $section.css({width: sectionWidth + x/2}).append($newDevice);
   }
 
 
