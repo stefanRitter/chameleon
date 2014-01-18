@@ -1,7 +1,7 @@
 cameleon
 ========
 
-Chrome extension Cameloen let's you quickly preview your web app in multiple device viewports.
+A Chrome extension which let's you quickly preview the responsiveness of your web app in multiple device viewports.
 
 
 Todo:

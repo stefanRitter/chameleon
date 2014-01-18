@@ -32,9 +32,13 @@ chrome.browserAction.onClicked.addListener(function (tab) {
         y: 640
       }];
 
+  if (!localStorage['cameleon_devices']) {
+    localStorage['cameleon_devices'] = JSON.stringify(defaultDevices);
+  }
+
 
   chrome.tabs.create({'url': chrome.extension.getURL('cameleon.html')}, function (newTab) {
-    var devices = localStorage['cameleon_devices'] || defaultDevices;
+    var devices = JSON.parse(localStorage['cameleon_devices']);
 
     cameleonTab = newTab;
     chrome.tabs.sendMessage(cameleonTab.id, {
