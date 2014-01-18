@@ -4,55 +4,105 @@
     <title>Cameleon</title>
     <link rel="icon" type="image/png" href="icon.png">
     <style type="text/css">
+      @font-face { 
+        font-family: multicolore;
+        src: url('multicolore.otf');
+      }
       html {
-        font-family: Helvetica, Arial, sans-serif;
+        font-family: multicolore, sans-serif;
         font-size: 1.5em;
         line-height: 1.5em;
       }
       iframe::-webkit-scrollbar {  
         display: none;
       }
+      section {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: flex-start;
+        align-items: flex-end;
+      }
+      h2 {
+        margin-top: 2em;
+      }
       .device {
-        display: inline-block;
         text-align: center;
+        position: relative;
         margin: 1em;
       }
-      .ios-portrait {
+      .ios-portrait iframe {
         border-left: 20px solid Black;
         border-right: 20px solid Black;
         border-top: 90px solid Black;
         border-bottom: 90px solid Black;
         border-radius: 50px;
       }
-      .ios-landscape {
+      .ios-landscape iframe {
         border-left: 90px solid Black;
         border-right: 90px solid Black;
         border-top: 20px solid Black;
         border-bottom: 20px solid Black;
         border-radius: 50px;
       }
-      .android-portrait {
+      .android-portrait iframe {
         border-left: 15px solid Silver;
         border-right: 15px solid Silver;
         border-top: 70px solid Silver;
         border-bottom: 70px solid Silver;
         border-radius: 40px;
       }
-      .android-landscape {
+      .android-landscape iframe {
         border-left: 70px solid Silver;
         border-right: 70px solid Silver;
         border-top: 15px solid Silver;
         border-bottom: 15px solid Silver;
         border-radius: 40px;
       }
+      .button {
+        position: absolute;
+        display: block;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 4px solid #21262a;
+        background: Black;
+      }
+      .ios-portrait .button {
+        bottom: 2.6em;
+        left: 50%;
+        margin-left: -25px;
+      }
+      .ios-landscape .button {
+        left: 1em;
+        top: 50%;
+        margin-top: -2.1em;
+      }
+      .android-portrait .button, .android-landscape .button {
+        width: 10px;
+        height: 10px;
+      }
+      .android-portrait .button {
+        top: 1.1em;
+        left: 50%;
+        margin-left: -5px;
+      }
+      .android-landscape .button {
+        top: 50%;
+        margin-top: -1em;
+        right: 1.1em;
+      }
     </style>
   </head>
   <body>
+    <h2>Portrait</h2>
     <section class="portrait">
     </section>
 
+    <h2>Landscape</h2>
     <section class="landscape">
     </secion>
+    
+    <script type="text/javascript"></script>
     <script src="zepto.min.js"></script>
     <script src="script.js"></script>
   </body>
