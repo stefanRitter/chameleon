@@ -3,21 +3,53 @@
   <head>
     <title>Cameleon - Options</title>
     <link rel="icon" type="image/png" href="/assets/icon.png">
+    <style type="text/css">
+      @font-face { 
+        font-family: multicolore;
+        src: url('/assets/multicolore.otf');
+      }
+      html {
+        font-family: multicolore, sans-serif;
+        font-size: 1.5em;
+        line-height: 1.5em;
+        text-align: center;
+      }
+      a {
+        text-decoration: none;
+        color: #59b63f;
+      }
+      button {
+        padding: 0.6em 2em 0.4em 2em;
+        font-size: 1em;
+        -webkit-appearance: none;
+        appearance: none;
+        border: 0;
+        border-radius: 12px;
+        background-color: #cad42c;
+        font-family: inherit;
+      }
+      button#save {
+        background-color: #5a53e5;
+      }
+      button.remove {
+        background-color: #EC5216;
+        padding: 0.6em 0.6em 0.4em 0.6em;
+      }
+      .device {
+        vertical-align: bottom;
+      }
+      #status {
+        height: 1.5em;
+        color: #59b63f;
+      }
+      #device-template {
+        display: none;
+      }
+    </style>
   </head>
   <body>
 
     <div id="devices">
-      <div class="device">
-        Name: <input placeholder="Device's name" value="name" class="device-name">
-        Type: 
-        <select>
-          <option>iOS</option>
-          <option>Android</option>
-        </select>
-        Viewport (portrait):
-        Width: <input type="number" value="x">
-        Height: <input type="number" value="y">
-      </div>
     </div>
 
     <br>
@@ -27,6 +59,25 @@
     <button id="add">Add a device</button>
     <button id="save">Save</button>
 
+    <p>
+      Checkout 
+      <a href="http://viewportsizes.com/" target="_blank">viewportsizes.com</a>
+      to get the right pixel count for your devices.
+    </p>
+    
+    <div id="device-template">
+      <div class="device">
+          Name: <input placeholder="Device's name" name="title" class="device-name">
+          Type: 
+          <select>
+            <option>iOS</option>
+            <option>Android</option>
+          </select>
+          Portrait Width: <input type="number" name="x">
+          Landscape Width: <input type="number" name="y">
+          <button class="remove">X</button>
+      </div>
+    </div>
     <script type="text/javascript" src="options.js"></script>
   </body>
 </html>

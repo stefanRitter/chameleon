@@ -1,14 +1,18 @@
 
 (function () {
   'use strict';
+  var $devices = document.getElementById("devices"),
+      template = document.getElementById('device-template').querySelector('.device');
 
-  // Saves options to localStorage.
-  function save_options() {
-    var select = document.getElementById("color");
-    var color = select.children[select.selectedIndex].value;
-    localStorage["favorite_color"] = color;
+  // Saves devices to localStorage.
+  function saveOptions() {
+    for (var i = 0, len = $devices.children.length; i < len; i++) {
+      var device = $devices.children[i];
+      console.log(device);
+    }
 
-    // Update status to let user know options were saved.
+
+    // Let user know options were saved.
     var status = document.getElementById("status");
     status.innerHTML = "Options Saved.";
     setTimeout(function() {
@@ -16,25 +20,44 @@
     }, 750);
   }
 
+
   // Restores previously created devices from localStorage.
-  function restore_options() {
-    var json = localStorage['cameleon_devices'];
-    if (!json) {
+  function restoreOptions() {
+    var devices = JSON.parse(localStorage['cameleon_devices']);
+
+    if (!devices) {
       return;
     }
-
-    var devices = JSON.parse(json);
     
-    var select = document.getElementById("color");
-    for (var i = 0; i < select.children.length; i++) {
-      var child = select.children[i];
-      if (child.value == favorite) {
-        child.selected = "true";
-        break;
-      }
-    }
+    devices.forEach(function (device) {
+      var $device = template.cloneNode(true),
+          $inputs = $device.querySelectorAll('input'),
+          $typeSelect = $device.querySelector('select');
+
+      $inputs[0].value = device.title;
+      $inputs[1].value = device.x;
+      $inputs[2].value = device.y;
+
+    });
   }
 
-  document.addEventListener('DOMContentLoaded', restore_options);
-  document.querySelector('#save').addEventListener('click', save_options);
+
+  // remove device
+  function removeDevice (event) {
+    var device = event.target.parentNode;
+    device.parentNode.removeChild(device);
+  }
+
+
+  // add a device to the options list
+  function addDevice (event, device) {
+    device = device || template.cloneNode(true);
+    device.addEventListener('click', removeDevice);
+    $devices.appendChild(device);
+  }
+
+
+  document.addEventListener('DOMContentLoaded', restoreOptions);
+  document.querySelector('#save').addEventListener('click', saveOptions);
+  document.querySelector('#add').addEventListener('click', addDevice);
 })();
