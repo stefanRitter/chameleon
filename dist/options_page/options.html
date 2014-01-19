@@ -51,6 +51,7 @@
         border-radius: 12px;
         background-color: #cad42c;
         font-family: inherit;
+        cursor: pointer;
       }
       button#save {
         background-color: #5a53e5;
@@ -77,6 +78,18 @@
       #device-template {
         display: none;
       }
+      .donate {
+        font-size: 0.8em;
+      }
+      .donate input {
+        border: 0;
+      }
+      .donate form {
+        display: inline-block;
+      }
+      .donate button {
+        padding: 0.6em 1em 0.4em 1em;
+      }
     </style>
   </head>
   <body>
@@ -96,8 +109,18 @@
     <p>
       Checkout 
       <a href="http://viewportsizes.com/" target="_blank">viewportsizes.com</a>
-      to get the right pixel count for your devices.
+      to get the right pixel count when adding devices.
     </p>
+
+    <div class="donate">
+      Happy with Cameleon? Please 
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+        <input type="hidden" name="cmd" value="_s-xclick">
+        <input type="hidden" name="hosted_button_id" value="JNL5QF29FU4RJ">
+        <button border="0" name="submit">support</button>
+      </form>
+      my work. Thanks!
+    </div>
     
     <div id="device-template">
       <div class="device">
