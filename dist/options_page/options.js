@@ -2,7 +2,7 @@
 (function () {
   'use strict';
   
-  var devices = document.getElementById("devices"),
+  var devices = document.getElementById('devices'),
       template = document.getElementById('device-template').querySelector('.device');
 
 
@@ -21,16 +21,42 @@
 
   // Saves devices to localStorage.
   function saveOptions() {
+    var savedDevices = [];
+
     for (var i = 0, len = devices.children.length; i < len; i++) {
-      var device = devices.children[i];
-      console.log(device);
+      var deviceNode = devices.children[i],
+          inputs = deviceNode.querySelectorAll('input'),
+          typeSelect = deviceNode.querySelector('select'),
+          device = {};
+      
+      device.title = inputs[0].value;
+      device.x = inputs[1].value;
+      device.y = inputs[2].value;
+
+      // select device type (ios or android)
+      for (var j = 0, length = typeSelect.children.length; j < length; j++) {
+        var option = typeSelect.children[j];
+        if (option.selected === true) {
+          device.type = option.value;
+          break;
+        }
+      }
+
+      if (device.title !== '' && device.x !== '' && device.y !== '' && device.type) {
+        savedDevices.push(device);
+        deviceNode.style.background = 'transparent';
+      } else {
+        deviceNode.style.background = '#EC5216';
+      }
     }
 
+    localStorage['cameleon_devices'] = JSON.stringify(savedDevices);
+
     // Let user know options were saved.
-    var status = document.getElementById("status");
-    status.innerHTML = "Options Saved.";
+    var status = document.getElementById('status');
+    status.innerHTML = 'Options Saved.';
     setTimeout(function() {
-      status.innerHTML = "";
+      status.innerHTML = '';
     }, 750);
   }
 
@@ -56,7 +82,7 @@
       for (var i = 0, len = typeSelect.children.length; i < len; i++) {
         var option = typeSelect.children[i];
         if (option.value === device.type) {
-          option.selected = "true";
+          option.selected = 'true';
           break;
         }
       }

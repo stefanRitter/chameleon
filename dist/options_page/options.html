@@ -14,6 +14,10 @@
         line-height: 1.5em;
         text-align: center;
       }
+      html, body {
+        width: 1200px;
+        margin: 0 auto;
+      }
       a {
         text-decoration: none;
         color: #59b63f;
@@ -36,7 +40,9 @@
         padding: 0.6em 0.6em 0.4em 0.6em;
       }
       .device {
+        margin-top: 1em;
         vertical-align: bottom;
+        border-radius: 12px;
       }
       #status {
         height: 1.5em;
@@ -48,6 +54,8 @@
     </style>
   </head>
   <body>
+
+    <h2>Your devices:</h2>
 
     <div id="devices">
     </div>
@@ -73,8 +81,8 @@
             <option value='ios'>iOS</option>
             <option value='android'>Android</option>
           </select>
-          Portrait Width: <input type="number" name="x">
-          Landscape Width: <input type="number" name="y">
+          Portrait-width: <input type="number" name="x">
+          Landscape-width: <input type="number" name="y">
           <button class="remove">X</button>
       </div>
     </div>
