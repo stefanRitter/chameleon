@@ -1,6 +1,7 @@
 
 (function () {
   'use strict';
+  
   var devices = document.getElementById("devices"),
       template = document.getElementById('device-template').querySelector('.device');
 
@@ -13,7 +14,7 @@
 
   function addDevice (event, device) {
     device = device || template.cloneNode(true);
-    device.addEventListener('click', removeDevice);
+    device.querySelector('.remove').addEventListener('click', removeDevice);
     devices.appendChild(device);
   }
 
@@ -50,6 +51,15 @@
       inputs[0].value = device.title;
       inputs[1].value = device.x;
       inputs[2].value = device.y;
+
+      // select device type (ios or android)
+      for (var i = 0, len = typeSelect.children.length; i < len; i++) {
+        var option = typeSelect.children[i];
+        if (option.value === device.type) {
+          option.selected = "true";
+          break;
+        }
+      }
 
       addDevice(null, deviceNode);
     });
