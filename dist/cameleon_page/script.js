@@ -40,10 +40,11 @@
       var devices = message.devices || [],
           url = message.url,
           localFile = /file:\/\//,
+          chromeUri = /chrome:\/\//,
           xhr = new XMLHttpRequest(),
           i, len;
 
-      if (localFile.test(url) && !isAllowedAccess) {
+      if ((localFile.test(url) && !isAllowedAccess) || chromeUri.test(url))  {
         // show error if we don't have acces to local files
         url = 'error-file-url.html';
       }

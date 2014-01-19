@@ -37,7 +37,7 @@ chrome.browserAction.onClicked.addListener(function (tab) {
   }
 
 
-  chrome.tabs.create({'url': chrome.extension.getURL('cameleon.html')}, function (newTab) {
+  chrome.tabs.create({'url': chrome.extension.getURL('cameleon_page/cameleon.html')}, function (newTab) {
     var devices = JSON.parse(localStorage['cameleon_devices']);
 
     cameleonTab = newTab;

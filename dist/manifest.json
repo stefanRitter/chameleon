@@ -13,15 +13,15 @@
     "https://*/*"
   ],
 
-  "options_page": "options.html",
+  "options_page": "options_page/options.html",
   
   "background": {
-    "scripts": ["background.js"],
+    "scripts": ["background_page/background.js"],
     "persistent": false
   },
   
   "browser_action": {
-    "default_icon": "icon.png",
+    "default_icon": "assets/icon.png",
     "default_title": "View in Cameleon"
   }
 }

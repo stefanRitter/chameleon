@@ -16,12 +16,15 @@
     }, 750);
   }
 
-  // Restores select box state to saved value from localStorage.
+  // Restores previously created devices from localStorage.
   function restore_options() {
-    var favorite = localStorage["favorite_color"];
-    if (!favorite) {
+    var json = localStorage['cameleon_devices'];
+    if (!json) {
       return;
     }
+
+    var devices = JSON.parse(json);
+    
     var select = document.getElementById("color");
     for (var i = 0; i < select.children.length; i++) {
       var child = select.children[i];
