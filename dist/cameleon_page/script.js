@@ -9,70 +9,71 @@
 // 4. refresh on request
 
 
-(function () {
+function constructDevice(device, url, orientation) {
   'use strict';
 
-  function constructDevice(device, url, orientation) {
-    var deviceTemplate = '<div class="device"><iframe></iframe><span class="button"></span><br><span class="title"></span></div>',
-        $newDevice = $(deviceTemplate),
-        x = (orientation === 'landscape') ? device.y : device.x,
-        y = (orientation === 'landscape') ? device.x : device.y,
-        $section = $('.' + orientation),
-        sectionWidth = $section.width();
-      
-    $newDevice
-      .addClass(device.type + '-' + orientation)
-      .find('iframe')
-      .attr({
-        src: url,
-        width: x,
-        height: y
-      })
-      .siblings('.title')
-      .text(device.title);
+  var deviceTemplate = '<div class="device"><iframe></iframe><span class="button"></span><br><span class="title"></span></div>',
+      $newDevice = $(deviceTemplate),
+      x = (orientation === 'landscape') ? device.y : device.x,
+      y = (orientation === 'landscape') ? device.x : device.y,
+      $section = $('.' + orientation),
+      sectionWidth = $section.width();
+    
+  $newDevice
+    .addClass(device.type + '-' + orientation)
+    .find('iframe')
+    .attr({
+      src: url,
+      width: x,
+      height: y
+    })
+    .siblings('.title')
+    .text(device.title);
 
-    $section.css({width: sectionWidth + x/2}).append($newDevice);
-  }
+  $section.css({width: sectionWidth + x/2}).append($newDevice);
+}
 
 
-  chrome.extension.onMessage.addListener(function (message, sender, sendResponse) {
-    chrome.extension.isAllowedFileSchemeAccess(function (isAllowedAccess) {
-      var devices = message.devices || [],
-          url = message.url,
-          localFile = /file:\/\//,
-          chromeUri = /chrome:\/\//,
-          xhr = new XMLHttpRequest(),
-          i, len;
+chrome.extension.onMessage.addListener(function (message, sender, sendResponse) {
+  chrome.extension.isAllowedFileSchemeAccess(function (isAllowedAccess) {
+    'use strict';
 
-      if ((localFile.test(url) && !isAllowedAccess) || chromeUri.test(url))  {
-        // show error if we don't have acces to local files
-        url = 'error-file-url.html';
+    var devices = message.devices || [],
+        url = message.url,
+        localFile = /file:\/\//,
+        chromeUri = /chrome:\/\//,
+        xhr = new XMLHttpRequest(),
+        i, len;
+
+    if ((localFile.test(url) && !isAllowedAccess) || chromeUri.test(url))  {
+      // show error if we don't have acces to local files
+      url = 'error-file-url.html';
+    }
+
+    xhr.onload = function () {
+      // show error if we can't display this url in an iframe
+      var xfopts = this.getResponseHeader('x-frame-options');
+      xfopts = (typeof xfopts === 'string') ? xfopts.toUpperCase() : null;
+      if (xfopts === 'SAMEORIGIN' || xfopts === 'DENY') {
+        url = 'error-x-frame-options.html';
       }
 
-      xhr.onload = function () {
-        // show error if we can't display this url in an iframe
-        var xfopts = this.getResponseHeader('x-frame-options');
-        xfopts = (typeof xfopts === 'string') ? xfopts.toUpperCase() : null;
-        if (xfopts === 'SAMEORIGIN' || xfopts === 'DENY') {
-          url = 'error-x-frame-options.html';
+      if (devices.length > 0) {        
+        for (i = 0, len = devices.length; i < len; i++) {
+          constructDevice(devices[i], url, 'portrait');
+          constructDevice(devices[i], url, 'landscape');
         }
-
-        if (devices.length > 0) {        
-          for (i = 0, len = devices.length; i < len; i++) {
-            constructDevice(devices[i], url, 'portrait');
-            constructDevice(devices[i], url, 'landscape');
-          }
-        
-        } else { 
-          // update all iframes
-          devices = Array.prototype.slice.call(document.getElementsByTagName('iframe'));
-          devices.forEach(function (iframe) {
-            iframe.src = url;
-          });
-        }
-      };
-      xhr.open('GET', url, true);
-      xhr.send();
-    });
+      
+      } else { 
+        // update all iframes
+        devices = Array.prototype.slice.call(document.getElementsByTagName('iframe'));
+        devices.forEach(function (iframe) {
+          iframe.src = url;
+        });
+      }
+    };
+    xhr.open('GET', url, true);
+    xhr.send();
   });
-})();
+});
+
