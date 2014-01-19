@@ -32,6 +32,7 @@ chrome.browserAction.onClicked.addListener(function (tab) {
         y: 640
       }];
 
+
   if (!localStorage['cameleon_devices']) {
     localStorage['cameleon_devices'] = JSON.stringify(defaultDevices);
   }
