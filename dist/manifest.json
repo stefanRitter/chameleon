@@ -3,7 +3,7 @@
 
   "name": "Cameleon",
   "description": "Let's you quickly preview your web app in multiple device viewports.",
-  "version": "0.9.0",
+  "version": "1.0.0",
 
   "permissions": [
     "activeTab",
