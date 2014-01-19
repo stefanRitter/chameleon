@@ -30,7 +30,7 @@ function constructDevice(device, url, orientation) {
     .siblings('.title')
     .text(device.title);
 
-  $section.css({width: sectionWidth + x/2}).append($newDevice);
+  $section.css({width: sectionWidth + x}).append($newDevice);
 }
 
 
