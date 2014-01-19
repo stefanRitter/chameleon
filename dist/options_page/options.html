@@ -6,7 +6,7 @@
     <style type="text/css">
       @font-face { 
         font-family: multicolore;
-        src: url('/assets/multicolore.otf');
+        src: url(/assets/multicolore.otf);
       }
       html {
         font-family: multicolore, sans-serif;
@@ -22,11 +22,31 @@
         text-decoration: none;
         color: #59b63f;
       }
+      p {
+        font-size: 0.8em;
+      }
+      input, button, select {
+        -webkit-appearance: none;
+        appearance: none;
+        background: transparent;
+      }
+      input, select {
+        border: 0;
+        border-bottom: 3px Black solid;
+        font-size: 1em;
+        text-align: center;
+        width: 4em;
+        border-radius: 0;
+      }
+      input:nth-child(1) {
+        width: 7em;
+      }
+      input:focus, button:focus {
+        outline-width: 0;
+      }
       button {
         padding: 0.6em 2em 0.4em 2em;
         font-size: 1em;
-        -webkit-appearance: none;
-        appearance: none;
         border: 0;
         border-radius: 12px;
         background-color: #cad42c;
@@ -39,10 +59,16 @@
         background-color: #EC5216;
         padding: 0.6em 0.6em 0.4em 0.6em;
       }
+      select {
+        display: inline-block;
+        text-indent: 0.5em;
+        width: 5em;
+      }
       .device {
         margin-top: 1em;
-        vertical-align: bottom;
+        vertical-align: middle;
         border-radius: 12px;
+        font-size: 0.9em;
       }
       #status {
         height: 1.5em;
@@ -75,14 +101,14 @@
     
     <div id="device-template">
       <div class="device">
-          Name: <input placeholder="Device's name" name="title" class="device-name">
+          Name: <input type="text" name="title"> &nbsp;
           Type: 
           <select>
-            <option value='ios'>iOS</option>
-            <option value='android'>Android</option>
-          </select>
-          Portrait-width: <input type="number" name="x">
-          Landscape-width: <input type="number" name="y">
+            <option value="ios">iOS</option>
+            <option value="android">Android</option>
+          </select> &nbsp;
+          Portrait-width: <input type="number" name="x"> &nbsp;
+          Landscape-width: <input type="number" name="y"> &nbsp;
           <button class="remove">X</button>
       </div>
     </div>
