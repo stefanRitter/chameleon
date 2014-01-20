@@ -3,7 +3,31 @@
   'use strict';
   
   var devices = document.getElementById('devices'),
-      template = document.getElementById('device-template').querySelector('.device');
+      template = document.getElementById('device-template').querySelector('.device'),
+      defaultDevices = [{
+        type: 'ios',
+        title: 'iPhone 4',
+        x: 320,
+        y: 480
+      },
+      {
+        type: 'ios',
+        title: 'iPhone 5',
+        x: 320,
+        y: 568
+      },
+      {
+        type: 'android',
+        title: 'HTC one',
+        x: 360,
+        y: 640
+      },
+      {
+        type: 'ios',
+        title: 'iPad mini',
+        x: 768,
+        y: 1024
+      }];
 
 
   function removeDevice (event) {
@@ -63,11 +87,11 @@
 
   // Restores previously created devices from localStorage.
   function restoreOptions() {
-    var savedDevices = JSON.parse(localStorage['cameleon_devices']);
-
-    if (!savedDevices) {
-      return;
+    if (!localStorage['cameleon_devices']) {
+      localStorage['cameleon_devices'] = JSON.stringify(defaultDevices);
     }
+    
+    var savedDevices = JSON.parse(localStorage['cameleon_devices']);
     
     savedDevices.forEach(function (device) {
       var deviceNode = template.cloneNode(true),

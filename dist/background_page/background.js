@@ -30,6 +30,12 @@ chrome.browserAction.onClicked.addListener(function (tab) {
         title: 'HTC one',
         x: 360,
         y: 640
+      },
+      {
+        type: 'ios',
+        title: 'iPad mini',
+        x: 768,
+        y: 1024
       }];
 
 
