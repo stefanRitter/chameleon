@@ -42,10 +42,12 @@ chrome.browserAction.onClicked.addListener(function (tab) {
     var devices = JSON.parse(localStorage['cameleon_devices']);
 
     cameleonTab = newTab;
-    chrome.tabs.sendMessage(cameleonTab.id, {
-      url: tab.url,
-      devices: devices
-    }, function (response) {});
+    setTimeout( function () {
+      chrome.tabs.sendMessage(cameleonTab.id, {
+        url: tab.url,
+        devices: devices
+      }, function (response) {});
+    }, 500);
   });
 
 
