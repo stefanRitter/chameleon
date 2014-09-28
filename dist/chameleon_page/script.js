@@ -19,7 +19,7 @@
   
 
   function constructDevice (device, url, orientation) {
-    var deviceTemplate = '<div class="device"><div class="nav-bar"/><div class="top-bar"/><iframe></iframe><span class="button"></span><br><span class="title"></span></div>',
+    var deviceTemplate = '<div class="device"><div class="nav-bar"/><div class="top-bar"/><iframe></iframe><div class="bottom-bar" /><span class="button"></span><span class="title"></span></div>',
         $newDevice = $(deviceTemplate),
         x = (orientation === 'landscape') ? device.y : device.x,
         y = (orientation === 'landscape') ? device.x : device.y,
@@ -36,7 +36,7 @@
       .find('iframe')
       .attr({
         src: url,
-        height: y - (20+44)
+        height: y - (20+44+(device.type === 'ios' ? 44 : 0))
       })
       .siblings('.title')
       .text(device.title);

@@ -48,9 +48,27 @@
         height: 44px
       }
       .device iframe {
+        display: block;
         border: 0;
         margin: 0;
         width: 100%;
+      }
+      .device .title {
+        position: absolute;
+        bottom: -125px;
+        left: 0;
+      }
+      .device.android-portrait .title {
+        bottom: -105px;
+      }
+      .device.android-landscape .title,
+      .device.ios-landscape .title {
+        bottom: -70px;
+      }
+      .device.ios-landscape .bottom-bar,
+      .device.ios-portrait .bottom-bar{
+        height: 44px;
+        background: LightGray;
       }
       .ios-portrait {
         border-left: 20px solid Black;
@@ -95,9 +113,9 @@
         margin-left: -25px;
       }
       .ios-landscape .button {
-        left: 18px;
+        left: -70px;
         top: 50%;
-        margin-top: -2.1em;
+        margin-top: -25px;
       }
       .android-portrait .button, .android-landscape .button {
         width: 10px;
@@ -109,9 +127,8 @@
         margin-left: -5px;
       }
       .android-landscape .button {
-        top: 50%;
-        margin-top: -1em;
-        right: 1.1em;
+        top: 10%;
+        right: -40px;
       }
       .portrait.active, .landscape.active {
         display: flex;
