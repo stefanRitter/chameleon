@@ -4,12 +4,9 @@
     <title>Chameleon - Options</title>
     <link rel="icon" type="image/png" href="/assets/icon.png">
     <style type="text/css">
-      @font-face { 
-        font-family: multicolore;
-        src: url(/assets/multicolore.otf);
-      }
       html {
-        font-family: multicolore, sans-serif;
+        font-family: Helvetica, Arial, sans-serif;
+        font-weight: 300;
         font-size: 1.5em;
         line-height: 1.5em;
         text-align: center;
@@ -17,6 +14,9 @@
       html, body {
         width: 1200px;
         margin: 0 auto;
+      }
+      h2 {
+        font-weight: 300;
       }
       a {
         text-decoration: none;
@@ -32,7 +32,7 @@
       }
       input, select {
         border: 0;
-        border-bottom: 3px Black solid;
+        border-bottom: 1px Black solid;
         font-size: 1em;
         text-align: center;
         width: 4em;
@@ -47,18 +47,27 @@
       button {
         padding: 0.6em 2em 0.4em 2em;
         font-size: 1em;
-        border: 0;
-        border-radius: 12px;
-        background-color: #cad42c;
+        border-radius: 5px;
+        background-color: #8476fe;
         font-family: inherit;
+        font-weight: 300;
         cursor: pointer;
+        border: 0;
       }
       button#save {
-        background-color: #5a53e5;
+        background-color: #2D2B63;
+        color: White;
       }
       button.remove {
-        background-color: #EC5216;
-        padding: 0.6em 0.6em 0.4em 0.6em;
+        background-color: #FF5B1C;
+        font-size: 1.5em;
+        line-height: 1;
+        color: white;
+        padding: 0 10px 5px 10px;
+        opacity: 0.5;
+      }
+      button.remove:hover {
+        opacity: 1;
       }
       select {
         display: inline-block;
@@ -101,10 +110,9 @@
 
     <br>
     <div id="status"></div>
-    <br>
     
     <button id="add">Add a device</button>
-    <button id="save">Save</button>
+    <button id="save">Save changes</button>
 
     <p>
       Checkout 
@@ -132,7 +140,7 @@
           </select> &nbsp;
           Portrait-width: <input type="number" name="x"> &nbsp;
           Landscape-width: <input type="number" name="y"> &nbsp;
-          <button class="remove">X</button>
+          <button class="remove">&times;</button>
       </div>
     </div>
     <script type="text/javascript" src="options.js"></script>
