@@ -11,15 +11,21 @@
 
 (function () {
   'use strict';
-  
-  function constructDevice(device, url, orientation) {
 
+  $('h2 a').on('click', function (e) {
+    e.preventDefault();
+    $('.js-toggleOrientation').toggleClass('active');
+  });
+  
+
+  function constructDevice (device, url, orientation) {
     var deviceTemplate = '<div class="device"><iframe></iframe><span class="button"></span><br><span class="title"></span></div>',
         $newDevice = $(deviceTemplate),
         x = (orientation === 'landscape') ? device.y : device.x,
         y = (orientation === 'landscape') ? device.x : device.y,
         $section = $('.' + orientation),
-        sectionWidth = $section.width();
+        sectionWidth = parseInt($section.css('width'), 10),
+        sectionWidthDelta = x + ((orientation === 'landscape') ? 200 : 60);
       
     $newDevice
       .addClass(device.type + '-' + orientation)
@@ -32,7 +38,11 @@
       .siblings('.title')
       .text(device.title);
 
-    $section.css({width: sectionWidth + parseInt(x, 10)}).append($newDevice);
+    $section
+      .css({
+        width: sectionWidth + sectionWidthDelta + 'px'
+      })
+      .append($newDevice);
   }
 
 

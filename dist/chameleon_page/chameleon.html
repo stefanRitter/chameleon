@@ -3,32 +3,41 @@
   <head>
     <title>Chameleon</title>
     <link rel="icon" type="image/png" href="/assets/icon.png">
+
     <style type="text/css">
-      @font-face { 
-        font-family: multicolore;
-        src: url('/assets/multicolore.otf');
-      }
-      html {
-        font-family: multicolore, sans-serif;
+      body {
+        font-family: Helvetica, Arial, sans-serif;
+        font-weight: 300;
         font-size: 1.5em;
-        line-height: 1.5em;
+        zoom: 0.8;
       }
       iframe::-webkit-scrollbar {  
         display: none;
       }
       section {
+        width: 0;
         display: flex;
         flex-flow: row nowrap;
         justify-content: flex-start;
         align-items: flex-end;
       }
       h2 {
-        margin-top: 2em;
+        font-weight: 300;
+        font-size: 1em;
+      }
+      h2 a {
+        text-decoration: none;
+        display: inline-block;
+        color: Black;
+        margin: 0.5em 1em;
+      }
+      h2 a.active {
+        border-bottom: 1px solid Black;
       }
       .device {
         text-align: center;
         position: relative;
-        margin: 1em;
+        margin-right: 1em;
       }
       .ios-portrait iframe {
         border-left: 20px solid Black;
@@ -91,15 +100,23 @@
         margin-top: -1em;
         right: 1.1em;
       }
+      .portrait.active, .landscape.active {
+        display: flex;
+      }
+      .portrait, .landscape {
+        display: none;
+      }
     </style>
   </head>
   <body>
-    <h2>Portrait</h2>
-    <section class="portrait">
+    <h2>
+      <a href="#portrait" class="js-toggleOrientation active">Portrait</a>
+      <a href="#landscape" class="js-toggleOrientation">Landscape</a>
+    </h2>
+    <section class="portrait js-toggleOrientation active" id="portrait">
     </section>
 
-    <h2>Landscape</h2>
-    <section class="landscape">
+    <section class="landscape js-toggleOrientation" id="landscape">
     </secion>
     
     <script type="text/javascript" src="zepto.min.js"></script>
