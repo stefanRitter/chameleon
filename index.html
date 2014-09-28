@@ -9,13 +9,15 @@
         src: url('multicolore.otf');
       }
       html, body {
-        font-family: multicolore, sans-serif;
+        /*font-family: multicolore, sans-serif;*/
+        font-family: Helvetica, Arial, sans-serif;
+        font-weight: 300;
         text-align: center;
         width: 100%;
         height: 100%;
         margin: 0;
         padding: 0;
-        background-color: #5a53e5;
+        background-color: White;
         color: Black;
 
         -webkit-transition: background-color 1.5s ease-in-out;
@@ -24,8 +26,8 @@
         transition: background-color 1.5s ease-in-out;
       }
       body {
-        background: url(chameleon.svg) no-repeat left center;
-        background-size: 200% 200%;
+        /*background: url(chameleon.svg) no-repeat left center;
+        background-size: 200% 200%;*/
         display: table;
       }
       section {
@@ -38,18 +40,12 @@
         display: table-cell;
         vertical-align: middle;
       }
-      footer {
+      .demo {
+        max-width: 800px;
+        margin: auto;
+      }
+      .demo img {
         width: 100%;
-        position: absolute;
-        bottom: 1em;
-        font-size: 0.8em;
-      }
-      .spacer {
-        height: 2em;
-      }
-      footer a {
-        text-decoration: none;
-        color: inherit;
       }
       .button {
         display: inline-block;
@@ -60,9 +56,10 @@
         letter-spacing: 1px;
         border-radius: 10px;
         margin: 0.5em;
+        font-weight: bold;
       }
       .chrome {
-        background-color: #EC5216;
+        background-color: #8476fe;
         color: inherit;
         font-size: 1em
       }
@@ -71,20 +68,20 @@
         color: inherit;
       }
       .twitter {
-        padding-top: 1em;
-      }
-      h1, h2 {
-        text-align: center;
+        position: fixed;
+        top: 0;
+        right: 1em;
       }
       h1 {
-        font-size: 8em;
-        font-weight: bold;
-        text-transform: uppercase;
-        margin: 0;
+        font-size: 3em;
+        font-weight: 300;
+        letter-spacing: 2px;
+        margin-top: 2em;
       }
       h2 {
         margin-top: 0;
-        font-size: 2em;
+        font-size: 1.5em;
+        font-weight: 300;
         line-height: 1.4em;
         padding: 0 10px;
         margin: 0 auto;
@@ -92,7 +89,7 @@
       }
       @media (max-width: 630px) {
         h1 {
-          font-size: 6em
+          font-size: 2em
         }
       }
     </style>
@@ -100,63 +97,36 @@
   <body>
     <section>
       <h1>
-        <span>C</span>
-        <span>h</span>
-        <span>a</span>
-        <span>m</span>
-        <span>e</span>
-        <span>l</span>
-        <span>e</span>
-        <span>o</span>
-        <span>n</span>
+        Chameleon
       </h1>
       
-      <h2>Quickly preview the responsiveness of your web app in multiple device viewports.</h2>
+      <h2>Beautifully simple responsive website testing.</h2>
       
       <p>
         <a href="https://chrome.google.com/webstore/detail/chameleon/acdpiemklcfaoglpjmidpjdbhkgdoede" class="button chrome">Get the Chrome Extension</a>
         <br>
-        <a href="https://github.com/stefanRitter/chameleon" class="button github">View on github</a>
+        <a href="https://github.com/stefanRitter/chameleon" class="button github">View on Github</a>
       </p>
 
-      <p>
+      <p class="demo">
         <img src="demo.png" alt="preview of mobile view">
       </p>
       
       <p class="twitter">
-        <a href="https://twitter.com/share" class="twitter-share-button" data-via="S__Ritter" data-size="large" data-count="none">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-via="stefanritr" data-size="large" data-count="none">
           Tweet
         </a>
         <script>
           !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
         </script>
-        <a href="https://twitter.com/S__Ritter" class="twitter-follow-button" data-show-count="false" data-size="large" data-show-screen-name="false">
-          Follow @S__Ritter
+        <a href="https://twitter.com/stefanritr" class="twitter-follow-button" data-show-count="false" data-size="large" data-show-screen-name="false">
+          Follow @stefanritr
         </a>
         <script>
           !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
         </script>
       </p>
-      
-      <div class="spacer"></div>
-      <footer>2014, <a href="https://plus.google.com/+StefanRitter?rel=author">Stefan Ritter</a></footer>
     </section>
-
-    <script type="text/javascript">
-      (function () {
-        'use strict';
-        
-        var colors = ['#59b63f', '#5a53e5', '#a7ecc1', '#cad42c'],
-            htmlEl = document.body.parentNode,
-            i = 0;
-        
-        setInterval( function () {
-          htmlEl.style.backgroundColor = colors[i];
-          i += 1;
-          i = i%colors.length;
-        }, 4000);
-      })();
-    </script>
     
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
