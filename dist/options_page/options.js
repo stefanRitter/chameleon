@@ -74,7 +74,7 @@
       }
     }
 
-    localStorage['cameleon_devices'] = JSON.stringify(savedDevices);
+    localStorage['chameleon_devices'] = JSON.stringify(savedDevices);
 
     // Let user know options were saved.
     var status = document.getElementById('status');
@@ -87,11 +87,11 @@
 
   // Restores previously created devices from localStorage.
   function restoreOptions() {
-    if (!localStorage['cameleon_devices']) {
-      localStorage['cameleon_devices'] = JSON.stringify(defaultDevices);
+    if (!localStorage['chameleon_devices']) {
+      localStorage['chameleon_devices'] = JSON.stringify(defaultDevices);
     }
     
-    var savedDevices = JSON.parse(localStorage['cameleon_devices']);
+    var savedDevices = JSON.parse(localStorage['chameleon_devices']);
     
     savedDevices.forEach(function (device) {
       var deviceNode = template.cloneNode(true),

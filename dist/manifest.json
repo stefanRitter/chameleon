@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
 
-  "name": "Cameleon",
-  "short_name": "Cameleon",
+  "name": "Chameleon",
+  "short_name": "Chameleon",
   "description": "Let's you quickly preview your web app in multiple device viewports.",
   "version": "1.1.4",
 
@@ -27,6 +27,6 @@
   
   "browser_action": {
     "default_icon": "assets/icon.png",
-    "default_title": "View in Cameleon"
+    "default_title": "View in Chameleon"
   }
 }

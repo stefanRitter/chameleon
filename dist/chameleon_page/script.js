@@ -1,6 +1,6 @@
-// Cameleon by Stefan Ritter
+// Chameleon by Stefan Ritter
 // MIT License
-// https://github.com/stefanRitter/cameleon
+// https://github.com/stefanRitter/chameleon
 
 // script.js:
 // 1. get page url (test against local file access and x-frame-options)

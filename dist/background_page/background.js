@@ -1,6 +1,6 @@
-// Cameleon by Stefan Ritter
+// Chameleon by Stefan Ritter
 // MIT License
-// https://github.com/stefanRitter/cameleon
+// https://github.com/stefanRitter/chameleon
 
 // background.js:
 // 1. opens a new tab
@@ -11,7 +11,7 @@
 chrome.browserAction.onClicked.addListener(function (tab) {
   'use strict';
 
-  var cameleonTab = {id: 0},
+  var chameleonTab = {id: 0},
       originalTab = tab,
       defaultDevices = [{
         type: 'ios',
@@ -39,17 +39,17 @@ chrome.browserAction.onClicked.addListener(function (tab) {
       }];
 
 
-  if (!localStorage['cameleon_devices']) {
-    localStorage['cameleon_devices'] = JSON.stringify(defaultDevices);
+  if (!localStorage['chameleon_devices']) {
+    localStorage['chameleon_devices'] = JSON.stringify(defaultDevices);
   }
 
 
-  chrome.tabs.create({'url': chrome.extension.getURL('cameleon_page/cameleon.html')}, function (newTab) {
-    var devices = JSON.parse(localStorage['cameleon_devices']);
+  chrome.tabs.create({'url': chrome.extension.getURL('chameleon_page/chameleon.html')}, function (newTab) {
+    var devices = JSON.parse(localStorage['chameleon_devices']);
 
-    cameleonTab = newTab;
+    chameleonTab = newTab;
     setTimeout( function () {
-      chrome.tabs.sendMessage(cameleonTab.id, {
+      chrome.tabs.sendMessage(chameleonTab.id, {
         url: tab.url,
         devices: devices
       }, function (response) {});
@@ -59,7 +59,7 @@ chrome.browserAction.onClicked.addListener(function (tab) {
 
   chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     var updateIframes = function () {
-      chrome.tabs.sendMessage(cameleonTab.id, {
+      chrome.tabs.sendMessage(chameleonTab.id, {
         update: true,
         url: originalTab.url
       }, function (response) {});
