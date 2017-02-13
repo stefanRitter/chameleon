@@ -39,13 +39,13 @@ chrome.browserAction.onClicked.addListener(function (tab) {
       }];
 
 
-  if (!localStorage['chameleon_devices']) {
-    localStorage['chameleon_devices'] = JSON.stringify(defaultDevices);
+  if (!localStorage['chameleon_devices_v2']) {
+    localStorage['chameleon_devices_v2'] = JSON.stringify(defaultDevices);
   }
 
 
   chrome.tabs.create({'url': chrome.extension.getURL('chameleon_page/chameleon.html')}, function (newTab) {
-    var devices = JSON.parse(localStorage['chameleon_devices']);
+    var devices = JSON.parse(localStorage['chameleon_devices_v2']);
 
     chameleonTab = newTab;
     setTimeout( function () {
@@ -64,9 +64,9 @@ chrome.browserAction.onClicked.addListener(function (tab) {
         url: originalTab.url
       }, function (response) {});
     };
-    
+
     if (tab.id === originalTab.id) {
-      
+
       if ('url' in changeInfo) {
         originalTab.url = changeInfo.url;
         updateIframes();
@@ -76,4 +76,3 @@ chrome.browserAction.onClicked.addListener(function (tab) {
     }
   });
 });
-

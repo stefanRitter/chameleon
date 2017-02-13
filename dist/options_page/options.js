@@ -1,15 +1,10 @@
 
 (function () {
   'use strict';
-  
+
   var devices = document.getElementById('devices'),
       template = document.getElementById('device-template').querySelector('.device'),
-      defaultDevices = [{
-        type: 'ios',
-        title: 'iPhone 4',
-        x: 320,
-        y: 480
-      },
+      defaultDevices = [
       {
         type: 'ios',
         title: 'iPhone 5',
@@ -21,6 +16,12 @@
         title: 'HTC one',
         x: 360,
         y: 640
+      },
+      {
+        type: 'ios',
+        title: 'iPhone 7+',
+        x: 414,
+        y: 736
       },
       {
         type: 'ios',
@@ -52,7 +53,7 @@
           inputs = deviceNode.querySelectorAll('input'),
           typeSelect = deviceNode.querySelector('select'),
           device = {};
-      
+
       device.title = inputs[0].value;
       device.x = inputs[1].value;
       device.y = inputs[2].value;
@@ -74,7 +75,8 @@
       }
     }
 
-    localStorage['chameleon_devices'] = JSON.stringify(savedDevices);
+    localStorage['chameleon_devices'] = undefined;
+    localStorage['chameleon_devices_v2'] = JSON.stringify(savedDevices);
 
     // Let user know options were saved.
     var status = document.getElementById('status');
@@ -87,12 +89,12 @@
 
   // Restores previously created devices from localStorage.
   function restoreOptions() {
-    if (!localStorage['chameleon_devices']) {
-      localStorage['chameleon_devices'] = JSON.stringify(defaultDevices);
+    if (!localStorage['chameleon_devices_v2']) {
+      localStorage['chameleon_devices_v2'] = JSON.stringify(defaultDevices);
     }
-    
-    var savedDevices = JSON.parse(localStorage['chameleon_devices']);
-    
+
+    var savedDevices = JSON.parse(localStorage['chameleon_devices_v2']);
+
     savedDevices.forEach(function (device) {
       var deviceNode = template.cloneNode(true),
           inputs = deviceNode.querySelectorAll('input'),

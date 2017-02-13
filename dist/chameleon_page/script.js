@@ -12,11 +12,15 @@
 (function () {
   'use strict';
 
-  $('h2 a').on('click', function (e) {
+  $('.js-toggleOrientation').on('click', function (e) {
     e.preventDefault();
     $('.js-toggleOrientation').toggleClass('active');
   });
-  
+
+  $('.js-optionsPage').on('click', function (e) {
+    e.preventDefault();
+    chrome.runtime.openOptionsPage();
+  });
 
   function constructDevice (device, url, orientation) {
     var deviceTemplate = '<div class="device"><div class="nav-bar"/><div class="top-bar"/><iframe></iframe><div class="bottom-bar" /><span class="button"></span><span class="title"></span></div>',
@@ -26,7 +30,7 @@
         $section = $('.' + orientation),
         sectionWidth = parseInt($section.css('width'), 10),
         sectionWidthDelta = x + ((orientation === 'landscape') ? 200 : 60);
-      
+
     $newDevice
       .addClass(device.type + '-' + orientation)
       .css({
@@ -78,13 +82,13 @@
           url = 'error-x-frame-options.html';
         }
 
-        if (devices.length > 0) {        
+        if (devices.length > 0) {
           for (i = 0, len = devices.length; i < len; i++) {
             constructDevice(devices[i], url, 'portrait');
             constructDevice(devices[i], url, 'landscape');
           }
-        
-        } else { 
+
+        } else {
           // update all iframes
           devices = Array.prototype.slice.call(document.getElementsByTagName('iframe'));
           devices.forEach(function (iframe) {
