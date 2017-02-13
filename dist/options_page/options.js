@@ -75,25 +75,26 @@
       }
     }
 
-    localStorage['chameleon_devices'] = undefined;
-    localStorage['chameleon_devices_v2'] = JSON.stringify(savedDevices);
+    localStorage['chameleon_devices_v3'] = JSON.stringify(savedDevices);
 
     // Let user know options were saved.
     var status = document.getElementById('status');
-    status.innerHTML = 'Options Saved.';
+    status.innerHTML = 'Options Saved. Please close all Chameleon tabs to update.';
     setTimeout(function() {
       status.innerHTML = '';
-    }, 750);
+    }, 3000);
   }
 
 
   // Restores previously created devices from localStorage.
   function restoreOptions() {
-    if (!localStorage['chameleon_devices_v2']) {
-      localStorage['chameleon_devices_v2'] = JSON.stringify(defaultDevices);
+    if (!localStorage['chameleon_devices_v3']) {
+      localStorage.removeItem('chameleon_devices');
+      localStorage.removeItem('chameleon_devices_v2');
+      localStorage['chameleon_devices_v3'] = JSON.stringify(defaultDevices);
     }
 
-    var savedDevices = JSON.parse(localStorage['chameleon_devices_v2']);
+    var savedDevices = JSON.parse(localStorage['chameleon_devices_v3']);
 
     savedDevices.forEach(function (device) {
       var deviceNode = template.cloneNode(true),

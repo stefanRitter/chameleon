@@ -25,11 +25,9 @@
   function constructDevice (device, url, orientation) {
     var deviceTemplate = '<div class="device"><div class="nav-bar"/><div class="top-bar"/><iframe></iframe><div class="bottom-bar" /><span class="button"></span><span class="title"></span></div>',
         $newDevice = $(deviceTemplate),
-        x = (orientation === 'landscape') ? device.y : device.x,
-        y = (orientation === 'landscape') ? device.x : device.y,
-        $section = $('.' + orientation),
-        sectionWidth = parseInt($section.css('width'), 10),
-        sectionWidthDelta = x + ((orientation === 'landscape') ? 200 : 60);
+        x = parseInt((orientation === 'landscape') ? device.y : device.x, 10),
+        y = parseInt((orientation === 'landscape') ? device.x : device.y, 10),
+        $section = $('.' + orientation);
 
     $newDevice
       .addClass(device.type + '-' + orientation)
@@ -51,11 +49,9 @@
         width: x
       })
 
-    $section
-      .css({
-        width: sectionWidth + sectionWidthDelta + 'px'
-      })
-      .append($newDevice);
+    $section.append($newDevice);
+
+    return x;
   }
 
 
@@ -69,6 +65,8 @@
           xhr = new XMLHttpRequest(),
           i, len;
 
+    console.log(devices);
+
       if ((localFile.test(url) && !isAllowedAccess) || chromeUri.test(url))  {
         // show error if we don't have acces to local files
         url = 'error-file-url.html';
@@ -76,7 +74,13 @@
 
       xhr.onload = function () {
         // show error if we can't display this url in an iframe
-        var xfopts = this.getResponseHeader('x-frame-options');
+        var xfopts = this.getResponseHeader('x-frame-options'),
+            landscapeWidth = 25,
+            portraitWidth = 25;
+
+        var $sectionLandscape = $('.landscape'),
+            $sectionPortrait = $('.portrait');
+
         xfopts = (typeof xfopts === 'string') ? xfopts.toUpperCase() : null;
         if (xfopts === 'SAMEORIGIN' || xfopts === 'DENY') {
           url = 'error-x-frame-options.html';
@@ -84,9 +88,22 @@
 
         if (devices.length > 0) {
           for (i = 0, len = devices.length; i < len; i++) {
-            constructDevice(devices[i], url, 'portrait');
-            constructDevice(devices[i], url, 'landscape');
+            portraitWidth += 25;
+            landscapeWidth += 25;
+            portraitWidth += constructDevice(devices[i], url, 'portrait');
+            landscapeWidth += constructDevice(devices[i], url, 'landscape');
+            console.log(portraitWidth, landscapeWidth);
           }
+
+          $sectionLandscape
+            .css({
+              width: landscapeWidth + 200 + 'px'
+            });
+          $sectionPortrait
+            .css({
+              width: portraitWidth + 60 + 'px'
+            });
+            console.log(landscapeWidth + 200 + 'px', portraitWidth + 60 + 'px');
 
         } else {
           // update all iframes

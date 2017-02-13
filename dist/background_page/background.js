@@ -13,12 +13,7 @@ chrome.browserAction.onClicked.addListener(function (tab) {
 
   var chameleonTab = {id: 0},
       originalTab = tab,
-      defaultDevices = [{
-        type: 'ios',
-        title: 'iPhone 4',
-        x: 320,
-        y: 480
-      },
+      defaultDevices = [
       {
         type: 'ios',
         title: 'iPhone 5',
@@ -33,19 +28,27 @@ chrome.browserAction.onClicked.addListener(function (tab) {
       },
       {
         type: 'ios',
+        title: 'iPhone 7+',
+        x: 414,
+        y: 736
+      },
+      {
+        type: 'ios',
         title: 'iPad mini',
         x: 768,
         y: 1024
       }];
 
 
-  if (!localStorage['chameleon_devices_v2']) {
-    localStorage['chameleon_devices_v2'] = JSON.stringify(defaultDevices);
+  if (!localStorage['chameleon_devices_v3']) {
+    localStorage.removeItem('chameleon_devices');
+    localStorage.removeItem('chameleon_devices_v2');
+    localStorage['chameleon_devices_v3'] = JSON.stringify(defaultDevices);
   }
 
 
   chrome.tabs.create({'url': chrome.extension.getURL('chameleon_page/chameleon.html')}, function (newTab) {
-    var devices = JSON.parse(localStorage['chameleon_devices_v2']);
+    var devices = JSON.parse(localStorage['chameleon_devices_v3']);
 
     chameleonTab = newTab;
     setTimeout( function () {
@@ -66,7 +69,6 @@ chrome.browserAction.onClicked.addListener(function (tab) {
     };
 
     if (tab.id === originalTab.id) {
-
       if ('url' in changeInfo) {
         originalTab.url = changeInfo.url;
         updateIframes();
