@@ -22,6 +22,16 @@
     chrome.runtime.openOptionsPage();
   });
 
+  $('.js-helpbutton').on('click', function (e) {
+    e.preventDefault();
+    chrome.tabs.create({ url: 'mailto:stefan@stefanritter.com?subject=Chameleon Help' }, function(tab) {
+        setTimeout(function() {
+            chrome.tabs.remove(tab.id);
+        }, 500);
+    });
+  });
+
+
   function constructDevice (device, url, orientation) {
     var deviceTemplate = '<div class="device"><div class="nav-bar"/><div class="top-bar"/><iframe></iframe><div class="bottom-bar" /><span class="button"></span><span class="title"></span></div>',
         $newDevice = $(deviceTemplate),
