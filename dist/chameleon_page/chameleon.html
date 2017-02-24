@@ -138,6 +138,10 @@
       .portrait, .landscape {
         display: none;
       }
+      .helpbutton {
+        font-size: 15px;
+        margin-left: 6em;
+      }
     </style>
   </head>
   <body>
@@ -145,6 +149,7 @@
       <a href="#portrait" class="js-toggleOrientation active">Portrait</a>
       <a href="#landscape" class="js-toggleOrientation">Landscape</a>
       <a href="#" class="js-optionsPage" class="">Settings</a>
+      <a href="mailto:stefan@stefanritter.com?subject=Chameleon Help" class="helpbutton" class="">Help/Feedback</a>
     </h2>
     <section class="portrait js-toggleOrientation active" id="portrait">
     </section>
@@ -154,5 +159,6 @@
 
     <script type="text/javascript" src="zepto.min.js"></script>
     <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="analytics.js"></script>
   </body>
 </html>

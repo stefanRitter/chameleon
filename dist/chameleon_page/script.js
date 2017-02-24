@@ -65,8 +65,6 @@
           xhr = new XMLHttpRequest(),
           i, len;
 
-    console.log(devices);
-
       if ((localFile.test(url) && !isAllowedAccess) || chromeUri.test(url))  {
         // show error if we don't have acces to local files
         url = 'error-file-url.html';
@@ -92,7 +90,6 @@
             landscapeWidth += 25;
             portraitWidth += constructDevice(devices[i], url, 'portrait');
             landscapeWidth += constructDevice(devices[i], url, 'landscape');
-            console.log(portraitWidth, landscapeWidth);
           }
 
           $sectionLandscape
@@ -103,7 +100,6 @@
             .css({
               width: portraitWidth + 60 + 'px'
             });
-            console.log(landscapeWidth + 200 + 'px', portraitWidth + 60 + 'px');
 
         } else {
           // update all iframes
